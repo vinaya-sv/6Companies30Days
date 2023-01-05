@@ -1,0 +1,28 @@
+﻿class Solution {
+    public int evalRPN(String[] tokens) {
+        ArrayList<Integer> arr=new ArrayList<Integer>();
+        for(String i:tokens){
+            if(Character.isDigit(i.charAt(i.length()-1)))
+                arr.add(Integer.parseInt(i));
+            else if(arr.size()>1){
+                switch(i){
+                    case "+":
+                        arr.set(arr.size()-2,arr.get(arr.size()-1)+arr.get(arr.size()-2));
+                        break;
+                    case "-":
+                        arr.set(arr.size()-2,arr.get(arr.size()-2)-arr.get(arr.size()-1));
+                        break;
+                    case "/":
+                        arr.set(arr.size()-2,arr.get(arr.size()-2)/arr.get(arr.size()-1));
+                        break;
+                    case "*":
+                        arr.set(arr.size()-2,arr.get(arr.size()-1)*arr.get(arr.size()-2));
+                        break;
+                }
+                arr.remove(arr.size()-1);
+            }
+            //System.out.println(arr);
+        }
+        return arr.get(0);    
+    }
+}
